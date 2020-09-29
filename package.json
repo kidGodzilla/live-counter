@@ -4,7 +4,8 @@
   "description": "A live mjpeg counter that you can embed in your website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mjpeg-server": "^0.3.0",
+    "sharp": "^0.26.1",
     "text2png": "^2.3.0"
   }
 }
