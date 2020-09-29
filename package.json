@@ -1,0 +1,24 @@
+{
+  "name": "live-counter",
+  "version": "0.2.7",
+  "description": "A live mjpeg counter that you can embed in your website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kidGodzilla/live-counter.git"
+  },
+  "author": "James Futhey <futhey@gmail.com> (http://jamesfuthey.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kidGodzilla/live-counter/issues"
+  },
+  "homepage": "https://github.com/kidGodzilla/live-counter#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mjpeg-server": "^0.3.0",
+    "text2png": "^2.3.0"
+  }
+}
