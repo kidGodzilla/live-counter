@@ -22,6 +22,7 @@
     "express": "^4.17.1",
     "mjpeg-server": "^0.3.0",
     "sharp": "^0.26.1",
+    "sync-via-ftp": "^0.2.7",
     "text2png": "^2.3.0"
   }
 }

@@ -1,15 +1,18 @@
 const mjpegServer = require('mjpeg-server');
+const syncViaFtp = require('sync-via-ftp');
 const text2png = require('text2png');
 const express = require('express');
 const sharp = require('sharp');
-const fs = require('fs');
 let app = express();
 const port = 5000;
 const debug = 0;
 
+let counts = syncViaFtp('counts');
 let handlers = {};
-let counts = {};
 
+/**
+ * Create a jpeg image representing our current count & return as buffer
+ */
 function makeImg (id, config, cb) {
     let { font, color, bg } = config;
     if (!counts[id]) counts[id] = 0;
@@ -34,7 +37,7 @@ function makeImg (id, config, cb) {
     let buff = Buffer.from(img);
 
     sharp(buff).toFormat('jpeg').jpeg({
-        quality: 65,
+        quality: 50,
         force: true
     }).toBuffer().then(data => {
         if (cb && typeof cb === 'function') return cb(data);
@@ -58,11 +61,16 @@ function writeToHandlers (id, data) {
     }
 }
 
+function fixId (id) {
+     return (id.length > 20) ? id.substring(0, 20) : id;
+}
+
 /**
  * Outputs a static image as a hit counter, updating live images as well
  */
 app.get('/static/:id', (req, res) => {
     let { id } = req.params;
+    id = fixId(id);
 
     makeImg(id, req.query, function (data) {
         writeToHandlers(id, data);
@@ -77,6 +85,7 @@ app.get('/static/:id', (req, res) => {
  */
 app.get('/live/:id', (req, res) => {
     let { id } = req.params;
+    id = fixId(id);
 
     makeImg(id, req.query, function (data) {
         if (!handlers[id]) handlers[id] = [];
@@ -86,5 +95,7 @@ app.get('/live/:id', (req, res) => {
         writeToHandlers(id, data);
     });
 });
+
+
 
 app.listen(port, function () { console.log('App listening on port', port) });
