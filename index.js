@@ -99,6 +99,22 @@ app.get('/live/:id', (req, res) => {
     });
 });
 
+/**
+ * Automatically clean up most handlers on a 5 minute interval
+ * (the last 5 handlers will remain)
+ */
+setInterval(() => {
+    // Last n items
+    function last (n, a) {
+        if (a.length <= n) return a;
+        return a.slice(Math.max(a.length - n, 0));
+    }
+
+    for (let k in handlers) {
+        handlers[k] = last(5, handlers[k]);
+    }
+}, 5 * 60 * 1000);
+
 
 // Serve public directory
 app.use(express.static('public'));
