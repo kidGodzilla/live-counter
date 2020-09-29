@@ -7,7 +7,8 @@ let app = express();
 const port = 5000;
 const debug = 0;
 
-let counts = syncViaFtp('counts');
+global.counts = syncViaFtp('counts');
+let handlerTimers = {};
 let handlers = {};
 
 /**
@@ -53,7 +54,9 @@ function writeToHandlers (id, data) {
             try { handler.write(data) } catch(e){}
         });
 
-        setTimeout(() => {
+        clearTimeout(handlerTimers[id]);
+
+        handlerTimers[id] = setTimeout(() => {
             handlers[id].forEach(handler => {
                 try { handler.write(data) } catch(e){}
             });
@@ -97,5 +100,10 @@ app.get('/live/:id', (req, res) => {
 });
 
 
+// Serve public directory
+app.use(express.static('public'));
+
+// See counts (debug)
+app.get('/counts', (req, res) => { res.json(counts) });
 
 app.listen(port, function () { console.log('App listening on port', port) });
