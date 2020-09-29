@@ -13,7 +13,7 @@ You can install the source for this server by downloading this repository, and r
 
 ## Usage
 
-Each instance of the counter you embed on a website should have a unique ID. It can be anything (up to 20 characters) -- we don't pick that for you. It could be something programmatic like `md5(location.hostname)` a GUID, or numeral Id (`12345`).
+Each instance of the counter you embed on a website should have a unique ID. It can be anything (up to 20 characters) -- we don't pick that for you. It could be something programmatic like `md5(location.hostname)` a GUID, numeral Id (`12345`), or any other url-safe string you like (like `foo%20bar`).
 
 ```html
 <img src="http://localhost:5000/live/12345" height="40" />
@@ -21,11 +21,15 @@ Each instance of the counter you embed on a website should have a unique ID. It 
 
 ## Customization
 
+You can customize the widget by passing parameters, like:
+
 ```html
 <img src="http://localhost:5000/live/12345?font=Futura&color=black&bg=white" height="40" />
 ```
 
 ## Embedding a static image
+
+If you don't want to use a live image, you can use a static one, like:
 
 ```html
 <img src="http://localhost:5000/static/12345" height="40" />
@@ -35,9 +39,13 @@ Each instance of the counter you embed on a website should have a unique ID. It 
 
 Inspired by these blog posts: 
 
-https://underjord.io/live-server-push-without-js.html
-https://news.ycombinator.com/item?id=24613610
+https://underjord.io/live-server-push-without-js.html 
 
-https://joshwcomeau.com/react/serverless-hit-counter/
-https://news.ycombinator.com/item?id=24617086
+[[Discuss on HN]](https://news.ycombinator.com/item?id=24613610)
+
+--
+
+https://joshwcomeau.com/react/serverless-hit-counter/ 
+
+[[Discuss on HN]](https://news.ycombinator.com/item?id=24617086)
 

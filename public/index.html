@@ -5,30 +5,98 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test page</title>
+    <title>Live Counter: Example</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css">
+
+    <style>
+        body {
+            background: #eee;
+            font-family: sans-serif;
+        }
+        pre {
+            background: #000;
+            color: #eee;
+            padding: 5px 10px;
+        }
+        code {
+            font-family: monospace;
+            background: #aa000022;
+            font-weight: bold;
+            border-radius: 2px;
+            padding: 2px 4px;
+        }
+        pre > code {
+            font-weight: normal;
+            color: #eee;
+        }
+        a { font-weight: bold; }
+    </style>
 </head>
 <body>
 
 <div class="container" style="max-width: 640px; margin: 50px auto;">
-    <h1>Welcome!</h1>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, numquam, qui. Corporis eligendi illo itaque magni quia quibusdam quis saepe sed tenetur ut? Ad asperiores, autem ea eaque suscipit temporibus.</p>
+    <h1 id="live-counter">live-counter</h1>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis consequuntur cum cumque dolor dolore, eligendi, est eum facilis illum iste porro quia quo sunt tempore tenetur veritatis voluptate!</p>
+    <p>A live <strong>JPEG</strong> or <a href="https://en.wikipedia.org/wiki/Motion_JPEG" target="_blank">MJPEG</a> hit counter that you can embed in your website.</p>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, numquam, qui. Corporis eligendi illo itaque magni quia quibusdam quis saepe sed tenetur ut? Ad asperiores, autem ea eaque suscipit temporibus.</p>
+    <h2 id="how-it-works">How it Works</h2>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis consequuntur cum cumque dolor dolore, eligendi, est eum facilis illum iste porro quia quo sunt tempore tenetur veritatis voluptate!</p>
+    <ol>
+        <li>Each request serves an image that displays the number of requests made to that specific image.</li>
+        <li>You can choose either a <code>live</code> or <code>static</code> image. The <code>live</code> image is served as <code>mjpeg</code>, a format which can be updated continuously after the page load is complete.</li>
+        <li>The image can be customized by changing the default font, and colors.</li>
+    </ol>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis consequuntur cum cumque dolor dolore, eligendi, est eum facilis illum iste porro quia quo sunt tempore tenetur veritatis voluptate!</p>
+    <h2 id="installation">Installation</h2>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio, numquam, qui. Corporis eligendi illo itaque magni quia quibusdam quis saepe sed tenetur ut? Ad asperiores, autem ea eaque suscipit temporibus.</p>
+    <p>You can install the source for this server by downloading this repository, and running<br><code>npm install</code></p>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam beatae blanditiis consequuntur cum cumque dolor dolore, eligendi, est eum facilis illum iste porro quia quo sunt tempore tenetur veritatis voluptate!</p>
+    <h2 id="usage">Usage</h2>
 
-    <p>You can increment the counter on this page in real-time by visiting: <a href="/static/1" target="_blank">This static counter</a></p>
+    <p>Each instance of the counter you embed on a website should have a unique ID. It can be anything (up to 20 characters) -- we don&#39;t pick that for you. It could be something programmatic like <code>md5(location.hostname)</code> a GUID, numeral Id (<code>12345</code>), or any other url-safe string you like (like <code>foo%20bar</code>).</p>
+
+    <pre><code class="lang-html">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string">"http://localhost:5000/live/12345"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
+</code></pre>
+
+    <h2 id="customization">Customization</h2>
+
+    <p>You can customize the widget by passing parameters, like:</p>
+
+    <pre><code class="lang-html">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string">"http://localhost:5000/live/12345?font=Futura&amp;color=black&amp;bg=white"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
+</code></pre>
+
+    <h2 id="embedding-a-static-image">Embedding a static image</h2>
+
+    <p>If you don't want to use a live image, you can use a static one, like:</p>
+
+    <pre><code class="lang-html">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string">"http://localhost:5000/static/12345"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
+</code></pre>
+
+    <br>
+    <hr>
+    <br>
+
+    <h4 style="text-align:center">Inspired by these blog posts: </h4>
+
+    <marquee>
+        <a href="https://underjord.io/live-server-push-without-js.html">Live server push without Javascript</a>
+
+        <a href="https://news.ycombinator.com/item?id=24613610">[discuss on HN]</a>
+
+        --
+
+        <a href="https://joshwcomeau.com/react/serverless-hit-counter/">Serverless Hit Counter</a>
+
+        <a href="https://news.ycombinator.com/item?id=24617086">[discuss on HN]</a>
+
+
+    </marquee>
+
 
     <br><br>
+    <br>
 
     <div class="center" style="text-align:center">
         <p>This page has been visited this many times:</p>
