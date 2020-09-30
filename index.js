@@ -110,15 +110,18 @@ app.get('/live/:id', (req, res) => {
  * Update live output every 30s or so
  */
 setInterval(() => {
-    let thirtySecondsAgo = (+ new Date()) - (25 * 1000);
+    let thirtySecondsAgo = (+ new Date()) - (15 * 1000);
 
     for (let id in updated) {
         if (updated < thirtySecondsAgo) {
-            let data = imgs[id];
-            writeToHandlers(id, data);
+            // let data = imgs[id];
+            // writeToHandlers(id, data);
         }
+
+        let data = imgs[id];
+        if (data) writeToHandlers(id, data);
     }
-}, 15 * 1000);
+}, 10 * 1000);
 
 /**
  * Automatically clean up most handlers on a 5 minute interval
