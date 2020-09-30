@@ -54,6 +54,8 @@ function makeImg (id, config, cb, noIncrement) {
  * Attempts to write to all existing output handlers
  */
 function writeToHandlers (id, data) {
+    if (!data || !id) return;
+
     if (handlers[id]) {
         updated[id] = (+ new Date());
 
@@ -110,13 +112,10 @@ app.get('/live/:id', (req, res) => {
  * Update live output every 30s or so
  */
 setInterval(() => {
-    let thirtySecondsAgo = (+ new Date()) - (15 * 1000);
+    let fifteenSecondsAgo = (+ new Date()) - (15 * 1000);
 
     for (let id in updated) {
-        if (updated < thirtySecondsAgo) {
-            // let data = imgs[id];
-            // writeToHandlers(id, data);
-        }
+        if (updated < fifteenSecondsAgo) {}
 
         let data = imgs[id];
         if (data) writeToHandlers(id, data);
