@@ -4,8 +4,9 @@ const text2png = require('text2png');
 const express = require('express');
 const sharp = require('sharp');
 let app = express();
-const port = 5000;
-const debug = 0;
+
+const port = process.env.PORT || 5000;
+const debug = process.env.DEBUG || 0;
 
 global.counts = syncViaFtp('counts');
 let handlerTimers = {};
