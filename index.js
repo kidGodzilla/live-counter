@@ -10,15 +10,18 @@ const debug = 0;
 global.counts = syncViaFtp('counts');
 let handlerTimers = {};
 let handlers = {};
+let updated = {};
+let imgs = {};
 
 /**
  * Create a jpeg image representing our current count & return as buffer
  */
-function makeImg (id, config, cb) {
+function makeImg (id, config, cb, noIncrement) {
     let { font, color, bg } = config;
     if (!counts[id]) counts[id] = 0;
 
-    let num = (++counts[id]).toString();
+    if (!noIncrement) counts[id]++;
+    let num = (counts[id]).toString();
 
     if (!font) font = 'Technology-Bold'; // Futura
     if (!color) color = 'lime';
@@ -41,6 +44,7 @@ function makeImg (id, config, cb) {
         quality: 50,
         force: true
     }).toBuffer().then(data => {
+        imgs[id] = data;
         if (cb && typeof cb === 'function') return cb(data);
     }).catch(e => console.log);
 }
@@ -50,6 +54,8 @@ function makeImg (id, config, cb) {
  */
 function writeToHandlers (id, data) {
     if (handlers[id]) {
+        updated[id] = (+ new Date());
+
         handlers[id].forEach(handler => {
             try { handler.write(data) } catch(e){}
         });
@@ -98,6 +104,20 @@ app.get('/live/:id', (req, res) => {
         writeToHandlers(id, data);
     });
 });
+
+/**
+ * Update live output every 30s or so
+ */
+setInterval(() => {
+    let thirtySecondsAgo = (+ new Date()) - (30 * 1000);
+
+    for (let id in updated) {
+        if (updated < thirtySecondsAgo) {
+            let data = imgs[id];
+            writeToHandlers(id, data);
+        }
+    }
+}, 15 * 1000);
 
 /**
  * Automatically clean up most handlers on a 5 minute interval
