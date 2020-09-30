@@ -45,6 +45,7 @@ function makeImg (id, config, cb, noIncrement) {
         force: true
     }).toBuffer().then(data => {
         imgs[id] = data;
+
         if (cb && typeof cb === 'function') return cb(data);
     }).catch(e => console.log);
 }
@@ -109,7 +110,7 @@ app.get('/live/:id', (req, res) => {
  * Update live output every 30s or so
  */
 setInterval(() => {
-    let thirtySecondsAgo = (+ new Date()) - (30 * 1000);
+    let thirtySecondsAgo = (+ new Date()) - (25 * 1000);
 
     for (let id in updated) {
         if (updated < thirtySecondsAgo) {
@@ -121,7 +122,7 @@ setInterval(() => {
 
 /**
  * Automatically clean up most handlers on a 5 minute interval
- * (the last 5 handlers will remain)
+ * (the last 10 handlers will remain)
  */
 setInterval(() => {
     // Last n items
@@ -131,7 +132,7 @@ setInterval(() => {
     }
 
     for (let k in handlers) {
-        handlers[k] = last(5, handlers[k]);
+        handlers[k] = last(10, handlers[k]);
     }
 }, 5 * 60 * 1000);
 
@@ -139,7 +140,8 @@ setInterval(() => {
 // Serve public directory
 app.use(express.static('public'));
 
-// See counts (debug)
+// See debug output
 app.get('/counts', (req, res) => { res.json(counts) });
+app.get('/updated', (req, res) => { res.json(updated) });
 
 app.listen(port, function () { console.log('App listening on port', port) });
