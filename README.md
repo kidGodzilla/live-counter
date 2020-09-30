@@ -1,5 +1,11 @@
-# live-counter
+# Live Counter
 A live JPEG or [MJPEG](https://en.wikipedia.org/wiki/Motion_JPEG) hit counter that you can embed in your website.
+
+## Demo
+
+View a live demo at: https://hitcounter.mr365.co/
+
+![Counter](https://hitcounter.mr365.co/static/1)
 
 ## How it Works
 
