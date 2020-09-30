@@ -31,6 +31,16 @@
             color: #eee;
         }
         a { font-weight: bold; }
+        .copied {
+            border-radius: 3px;
+            position: absolute;
+            padding: 4px 12px;
+            margin-top: 20px;
+            background: #222;
+            color: #fafafa;
+            display: none;
+            z-index: 99;
+        }
     </style>
 </head>
 <body>
@@ -40,6 +50,8 @@
     <h1 id="live-counter">Live Hit Counter</h1>
 
     <p>A live <strong>JPEG</strong> or <a href="https://en.wikipedia.org/wiki/Motion_JPEG" target="_blank">MJPEG</a> hit counter that you can embed in your website.</p>
+
+    <br>
 
     <h2 id="how-it-works">How it Works</h2>
 
@@ -53,31 +65,49 @@
 
     <p>You can install the source for this server by downloading this repository, and running<br><code>npm install</code></p>
 
+    <p>Start the server with <code>npm start</code> -- the port is defined in <code>index.js</code>.</p>
+
+    <br>
+
     <h2 id="usage">Usage</h2>
 
     <p>Each instance of the counter you embed on a website should have a unique ID. It can be anything (up to 20 characters) -- we don&#39;t pick that for you. It could be something programmatic like <code>md5(location.hostname)</code> a GUID, numeral Id (<code>12345</code>), or any other url-safe string you like (like <code>foo%20bar</code>).</p>
 
-    <pre><code class="lang-html">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string">"http://localhost:5000/live/12345"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
+    <h4>Live Code</h4>
+
+    <p>
+        Enter an Id: <input type="text" id="id" placeholder="12345">
+        <br><small>This updates the examples below</small>
+    </p>
+
+    <h4>Usage Example</h4>
+
+    <pre><code class="lang-html" id="live" title="click to copy">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string live" data-clipboard-target="#live">"http://localhost:5000/live/12345"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
 </code></pre>
+
+    <br>
 
     <h2 id="customization">Customization</h2>
 
     <p>You can customize the widget by passing parameters, like:</p>
 
-    <pre><code class="lang-html">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string">"http://localhost:5000/live/12345?font=Futura&amp;color=black&amp;bg=white"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
+    <pre><code class="lang-html" id="custom" title="click to copy">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string custom" data-clipboard-target="#custom">"http://localhost:5000/live/12345?font=Futura&amp;color=black&amp;bg=white"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
 </code></pre>
+
+    <br>
 
     <h2 id="embedding-a-static-image">Embedding a static image</h2>
 
     <p>If you don't want to use a live image, you can use a static one, like:</p>
 
-    <pre><code class="lang-html">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string">"http://localhost:5000/static/12345"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
+    <pre><code class="lang-html" id="static" title="click to copy">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string static" data-clipboard-target="#static">"http://localhost:5000/static/12345"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
 </code></pre>
+
+    <br>
 
     <h2>Demo</h2>
 
     <p>You can increment the counter on this page in real-time by visiting: <a href="/static/1" target="_blank">This static counter</a>. The counter on this page will update in real-time without a refresh.</p>
-
 
     <br>
     <hr>
@@ -95,8 +125,6 @@
         <a href="https://joshwcomeau.com/react/serverless-hit-counter/">Serverless Hit Counter</a>
 
         <a href="https://news.ycombinator.com/item?id=24617086">[discuss on HN]</a>
-
-
     </marquee>
 
     <br><br><br>
@@ -107,6 +135,44 @@
         <img src="/live/1" alt="Hit Counter" height="30">
     </div>
 </div>
+
+<a href="https://github.com/kidGodzilla/live-counter" target="_blank" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+<span class="copied">Copied</span>
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+
+<script>
+    function updateCode (val) {
+        if (!val) val = '12345';
+        val = encodeURIComponent(val);
+        document.querySelector('.hljs-string.live').innerText = `"${ p }/live/${ val }"`;
+        document.querySelector('.hljs-string.custom').innerText = `"${ p }/live/${ val }?font=Futura&color=black&bg=white"`;
+        document.querySelector('.hljs-string.static').innerText = `"${ p }/static/${ val }"`;
+    }
+
+    function handler (e) {
+        var el = document.querySelector('.copied');
+        setTimeout(function () { el.style.display = 'none' }, 2200);
+        el.style.left = e.trigger.offsetLeft + 'px';
+        el.style.top = e.trigger.offsetTop + 'px';
+        el.style.display = 'block';
+    }
+
+    var p = location.protocol + '//' + location.host;
+    var c1 = new ClipboardJS('.hljs-string.custom');
+    var c2 = new ClipboardJS('.hljs-string.static');
+    var c3 = new ClipboardJS('.hljs-string.live');
+    updateCode();
+
+    c1.on('success', handler);
+    c2.on('success', handler);
+    c3.on('success', handler);
+
+    document.querySelector('#id').addEventListener('input', function (evt) {
+        updateCode(this.value);
+    });
+</script>
 
 </body>
 </html>
