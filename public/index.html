@@ -71,18 +71,19 @@
 
     <h2 id="usage">Usage</h2>
 
-    <p>Each instance of the counter you embed on a website should have a unique ID. It can be anything (up to 20 characters) -- we don&#39;t pick that for you. It could be something programmatic like <code>md5(location.hostname)</code> a GUID, numeral Id (<code>12345</code>), or any other url-safe string you like (like <code>foo%20bar</code>).</p>
+    <p>Each instance of the counter you embed on a website should have a unique ID. It can be anything (up to 20 characters) -- we don&#39;t pick that for you. It could be something programmatic like <code>md5(location.hostname)</code> a GUID, numeral Id (<code>123</code>), or any other url-safe string you like (like <code>foo%20bar</code>).</p>
 
     <h4>Live Code</h4>
 
     <p>
-        Enter an Id: <input type="text" id="id" placeholder="12345">
+        Enter an Id: <input type="text" id="id" placeholder="123">
+        <button onclick="randomId()">Random Id</button>
         <br><small>This updates the examples below</small>
     </p>
 
     <h4>Usage Example</h4>
 
-    <pre><code class="lang-html" id="live" title="click to copy">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string live" data-clipboard-target="#live">"http://localhost:5000/live/12345"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
+    <pre><code class="lang-html" id="live" title="click to copy">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string live" data-clipboard-target="#live">"http://localhost:5000/live/123"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
 </code></pre>
 
     <br>
@@ -91,7 +92,7 @@
 
     <p>You can customize the widget by passing parameters, like:</p>
 
-    <pre><code class="lang-html" id="custom" title="click to copy">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string custom" data-clipboard-target="#custom">"http://localhost:5000/live/12345?font=Futura&amp;color=black&amp;bg=white"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
+    <pre><code class="lang-html" id="custom" title="click to copy">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string custom" data-clipboard-target="#custom">"http://localhost:5000/live/123?font=Futura&amp;color=black&amp;bg=white"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
 </code></pre>
 
     <br>
@@ -100,7 +101,7 @@
 
     <p>If you don't want to use a live image, you can use a static one, like:</p>
 
-    <pre><code class="lang-html" id="static" title="click to copy">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string static" data-clipboard-target="#static">"http://localhost:5000/static/12345"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
+    <pre><code class="lang-html" id="static" title="click to copy">&lt;<span class="hljs-selector-tag">img</span> src=<span class="hljs-string static" data-clipboard-target="#static">"http://localhost:5000/static/123"</span> <span class="hljs-attribute">height</span>=<span class="hljs-string">"40"</span> /&gt;
 </code></pre>
 
     <br>
@@ -144,11 +145,17 @@
 
 <script>
     function updateCode (val) {
-        if (!val) val = '12345';
+        if (!val) val = '123';
         val = encodeURIComponent(val);
         document.querySelector('.hljs-string.live').innerText = `"${ p }/live/${ val }"`;
         document.querySelector('.hljs-string.custom').innerText = `"${ p }/live/${ val }?font=Futura&color=black&bg=white"`;
         document.querySelector('.hljs-string.static').innerText = `"${ p }/static/${ val }"`;
+    }
+
+    function randomId () {
+        var id = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+        document.querySelector('#id').value = id;
+        updateCode(id);
     }
 
     function handler (e) {
