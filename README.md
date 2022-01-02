@@ -3,9 +3,7 @@ A live JPEG or [MJPEG](https://en.wikipedia.org/wiki/Motion_JPEG) hit counter th
 
 ## Demo
 
-View a live demo at: https://hitcounter.mr365.co/
-
-Alternate demo: https://hits.serv.rs/
+View a live demo at: https://hits.serv.rs/
 
 ![Counter](https://hitcounter.mr365.co/static/1)
 
