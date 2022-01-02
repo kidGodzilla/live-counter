@@ -5,6 +5,8 @@ A live JPEG or [MJPEG](https://en.wikipedia.org/wiki/Motion_JPEG) hit counter th
 
 View a live demo at: https://hitcounter.mr365.co/
 
+Alternate demo: http://hit.serv.rs/
+
 ![Counter](https://hitcounter.mr365.co/static/1)
 
 ## How it Works
